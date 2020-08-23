@@ -1,0 +1,20 @@
+<div class="lists">
+    <div class="list-header">
+        <h2 class="list-title">Lists</h2>
+    </div>
+    <div class="list-body">
+        <div class="list-body-item" *ngFor="let item of lists; index as i"
+        (click)="activeListItem(i)" [class.active]="selectedIndex === i" >
+            <div class="list-body-item-content">{{ item }}</div>
+            <div class="list-body-item-action">
+                <i class="fa fa-pencil-square-o mr-2 icon-action" aria-hidden="true"></i>
+                <i class="fa fa-trash-o icon-action" aria-hidden="true"></i>
+            </div>
+        </div>
+    </div>
+    <div class="list-footer">
+        <button class="btn-add-list" (click)="addListItem()">
+            <i class="fa fa-plus mr-2" aria-hidden="true"></i>New List
+        </button>
+    </div>
+</div>
