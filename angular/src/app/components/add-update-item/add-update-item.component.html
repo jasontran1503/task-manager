@@ -1,12 +1,17 @@
 <div class="modal-body">
     <h4 class="modal-title">Create a new list</h4>
-    <form>
+    <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
         <div class="form-group">
-            <input type="text" class="form-control">
+            <input type="text" class="form-control" formControlName="content">
+        </div>
+        <div class="text-error">
+            <small *ngIf="formGroup.controls.content?.errors?.required && 
+                    formGroup.controls.content?.touched">Mời bạn nhập nội dung
+            </small>
+        </div>
+        <div class="modal-button">
+            <button type="button" class="btn-main btn-cancel" (click)="cancel()">Cancel</button>
+            <button type="submit" class="btn-main btn-add">Create</button>
         </div>
     </form>
-    <div class="modal-button">
-        <button type="button" class="btn-main btn-cancel" (click)="cancel()">Cancel</button>
-        <button type="button" class="btn-main btn-add">Create</button>
-    </div>
 </div>

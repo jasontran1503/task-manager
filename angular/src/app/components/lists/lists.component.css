@@ -9,6 +9,19 @@
 
 .list-header {
     width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.fa-refresh {
+    padding: 10px 10px 0px 0px;
+    transition: all ease .2s;
+}
+
+.fa-refresh:hover {
+    cursor: pointer;
+    font-size: 20px;
+    color: #007bff;
 }
 
 .list-title {
@@ -95,6 +108,8 @@
     font-weight: bold;
     outline: none;
     transition: all ease-in-out .5s;
+    font-size: 1.5vw;
+    letter-spacing: 0.4px;
 }
 
 .btn-add-list:hover {

@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { AddUpdateItemComponent } from '../add-update-item/add-update-item.component';
+import { Task } from 'src/app/shared/models/task';
 
 @Component({
   selector: 'app-tasks',
@@ -10,6 +11,9 @@ import { AddUpdateItemComponent } from '../add-update-item/add-update-item.compo
 export class TasksComponent implements OnInit {
 
   modalRef: BsModalRef;
+  selectedIndex: number = null;
+
+  @Input() tasks: Task[];
 
   constructor(private modalService: BsModalService) { }
 
@@ -22,6 +26,10 @@ export class TasksComponent implements OnInit {
         class: 'modal-dialog modal-dialog-centered',
         ignoreBackdropClick: true
       });
+  }
+
+  activeTaskItem(index: number) {
+    this.selectedIndex = index;
   }
 
 }

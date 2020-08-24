@@ -137,10 +137,13 @@ module.exports = {
     deleteList: async (req, res, next) => {
         try {
             const list = await List.findByIdAndDelete(req.query.listId);
-            await Task.deleteMany({ _id: { $in: list.tasks } }, (err) => {
-                next(err);
-            })
             if (list) {
+                const tasks = list.tasks;
+                if (tasks.length > 0) {
+                    await Task.deleteMany({ _id: { $in: tasks } }, (err) => {
+                        next(err);
+                    });
+                }
                 return res.status(200).json({
                     message: 'Xóa thành công',
                     data: list
@@ -150,6 +153,23 @@ module.exports = {
                     message: 'Không tìm thấy list'
                 });
             }
+            const tasks = list.tasks;
+            console.log(tasks);
+            if (tasks) {
+                // await Task.deleteMany({ _id: { $in: tasks } }, (err) => {
+                //     next(err);
+                // })
+            }
+            // if (list) {
+            //     return res.status(200).json({
+            //         message: 'Xóa thành công',
+            //         data: list
+            //     });
+            // } else {
+            //     return res.status(200).json({
+            //         message: 'Không tìm thấy list'
+            //     });
+            // }
         } catch (error) {
             next(error);
         }

@@ -1,7 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
-import { TasksComponent } from '../tasks/tasks.component';
-import { AddUpdateItemComponent } from '../add-update-item/add-update-item.component';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { List } from 'src/app/shared/models/list';
 
 @Component({
   selector: 'app-lists',
@@ -10,25 +8,34 @@ import { AddUpdateItemComponent } from '../add-update-item/add-update-item.compo
 })
 export class ListsComponent implements OnInit {
 
-  modalRef: BsModalRef;
-  lists = ['Học tập', 'Làm việc', 'Nghỉ ngơi', 'Du lịch'];
   selectedIndex: number = null;
 
-  constructor(private modalService: BsModalService) { }
+  @Input() lists: List[];
+  @Output() getListItemDetail = new EventEmitter();
+  @Output() deleteListItem = new EventEmitter();
+  @Output() refreshListItem = new EventEmitter();
+  @Output() openModalAddListItem = new EventEmitter();
+
+  constructor() { }
 
   ngOnInit(): void {
   }
 
-  addListItem() {
-    this.modalRef = this.modalService.show(AddUpdateItemComponent,
-      {
-        class: 'modal-dialog modal-dialog-centered',
-        ignoreBackdropClick: true
-      });
+  addList() {
+    this.openModalAddListItem.emit();
   }
 
-  activeListItem(index: number) {
+  refreshList() {
+    this.refreshListItem.emit();
+  }
+
+  deleteList(id: string) {
+    this.deleteListItem.emit(id);
+  }
+
+  activeListItem(list: List, index: number) {
     this.selectedIndex = index;
+    this.getListItemDetail.emit(list);
   }
 
 }
