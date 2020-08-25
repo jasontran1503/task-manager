@@ -2,7 +2,30 @@ const Task = require('../models/Task');
 const List = require('../models/List');
 
 module.exports = {
-
+    /**
+     * Get tasks by list id
+     * @route GET /api/task
+     * @queryParams listId
+     */
+    getAllTasksByListId: async (req, res, next) => {
+        const { listId } = req.query;
+        try {
+            const list = await List.findById(listId);
+            if (list) {
+                const tasks = await Task.find({ listId });
+                return res.status(200).json({
+                    message: 'Thành công',
+                    data: tasks
+                });
+            } else {
+                return res.status(200).json({
+                    message: 'Không tìm thấy list'
+                });
+            }
+        } catch (error) {
+            next(error);
+        }
+    },
     /**
      * Create task
      * @route POST /api/task

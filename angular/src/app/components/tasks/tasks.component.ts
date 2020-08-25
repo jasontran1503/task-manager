@@ -1,6 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
-import { AddUpdateItemComponent } from '../add-update-item/add-update-item.component';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { BsModalRef } from 'ngx-bootstrap/modal';
 import { Task } from 'src/app/shared/models/task';
 
 @Component({
@@ -14,18 +13,15 @@ export class TasksComponent implements OnInit {
   selectedIndex: number = null;
 
   @Input() tasks: Task[];
+  @Output() openModalAddTaskItem = new EventEmitter();
 
-  constructor(private modalService: BsModalService) { }
+  constructor() { }
 
   ngOnInit(): void {
   }
 
-  addTaskItem() {
-    this.modalRef = this.modalService.show(AddUpdateItemComponent,
-      {
-        class: 'modal-dialog modal-dialog-centered',
-        ignoreBackdropClick: true
-      });
+  addTask() {
+    this.openModalAddTaskItem.emit();
   }
 
   activeTaskItem(index: number) {

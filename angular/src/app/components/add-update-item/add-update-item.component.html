@@ -1,5 +1,5 @@
 <div class="modal-body">
-    <h4 class="modal-title">Create a new list</h4>
+    <h4 class="modal-title">{{ modalTitle }}</h4>
     <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
         <div class="form-group">
             <input type="text" class="form-control" formControlName="content">

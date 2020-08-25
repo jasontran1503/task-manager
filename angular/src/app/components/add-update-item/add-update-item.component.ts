@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ModalType } from 'src/app/shared/enum/modal-type.enum';
 
 @Component({
   selector: 'app-add-update-item',
@@ -10,7 +11,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class AddUpdateItemComponent implements OnInit {
 
   @Input() modalType: string;
+  @Input() modalTitle: string;
   @Output() eventAddList = new EventEmitter();
+  @Output() eventAddTask = new EventEmitter();
 
   formGroup: FormGroup;
   submitted = false;
@@ -32,7 +35,14 @@ export class AddUpdateItemComponent implements OnInit {
     this.submitted = true;
     const formValue = this.formGroup.getRawValue();
 
-    this.eventAddList.emit(formValue);
+    switch (this.modalType) {
+      case ModalType.ADD_LIST:
+        this.eventAddList.emit(formValue);
+        break;
+      case ModalType.ADD_TASK:
+        this.eventAddTask.emit(formValue);
+        break;
+    }
     this.cancel();
   }
 

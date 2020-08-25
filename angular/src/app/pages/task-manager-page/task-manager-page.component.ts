@@ -9,6 +9,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { AddUpdateItemComponent } from 'src/app/components/add-update-item/add-update-item.component';
 import { ModalType } from 'src/app/shared/enum/modal-type.enum';
+import { TaskService } from 'src/app/services/task.service';
 
 @Component({
   selector: 'app-task-manager-page',
@@ -21,11 +22,13 @@ export class TaskManagerPageComponent implements OnInit, OnDestroy {
   lists: List[];
   tasks: Task[];
   modalRef: BsModalRef;
+  listActive: List;
 
   destroy$ = new Subject();
 
   constructor(
     private listService: ListService,
+    private taskService: TaskService,
     private modalService: BsModalService,
     private spinner: NgxSpinnerService) { }
 
@@ -44,12 +47,13 @@ export class TaskManagerPageComponent implements OnInit, OnDestroy {
   }
 
   getListItemDetail(listItem: List) {
+    this.listActive = listItem;
     this.spinner.show();
-    this.listService.getListItemDetail(listItem._id)
+    this.taskService.getAllTasksByListId(listItem._id)
       .pipe(takeUntil(this.destroy$))
-      .subscribe((response: any) => {
+      .subscribe((response: DataResponse) => {
         this.spinner.hide();
-        this.tasks = response.tasks;
+        this.tasks = response.data;
       });
   }
 
@@ -75,7 +79,8 @@ export class TaskManagerPageComponent implements OnInit, OnDestroy {
 
   openModalAddListItem() {
     const initialState = {
-      modalType: ModalType.ADD_LIST
+      modalType: ModalType.ADD_LIST,
+      modalTitle: 'Create a new list'
     };
     this.modalRef = this.modalService.show(AddUpdateItemComponent,
       {
@@ -108,21 +113,37 @@ export class TaskManagerPageComponent implements OnInit, OnDestroy {
     });
   }
 
-  openModalAddTaskItem() {
-    const initialState = {
-      modalType: ModalType.ADD_TASK
-    };
-    this.modalRef = this.modalService.show(AddUpdateItemComponent,
-      {
-        class: 'modal-dialog modal-dialog-centered',
-        ignoreBackdropClick: true,
-        initialState
+  addTaskItem(listId: string, taskName: string) {
+    this.spinner.show();
+    this.taskService.addTask(listId, taskName)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((response: any) => {
+        this.spinner.hide();
+        console.log(response);
       });
+  }
 
-    // after modal close
-    this.modalRef.content.eventAddTask.subscribe(res => {
-      console.log(res);
-    });
+  openModalAddTaskItem() {
+    if (this.listActive) {
+      const initialState = {
+        modalType: ModalType.ADD_TASK,
+        modalTitle: 'Create a new task'
+      };
+      this.modalRef = this.modalService.show(AddUpdateItemComponent,
+        {
+          class: 'modal-dialog modal-dialog-centered',
+          ignoreBackdropClick: true,
+          initialState
+        });
+
+      // after modal close
+      this.modalRef.content.eventAddTask.subscribe(res => {
+        this.addTaskItem(this.listActive._id, res.content);
+        this.getListItemDetail(this.listActive);
+      });
+    } else {
+      alert('đá');
+    }
   }
 
   openModalUpdateTaskItem() {
