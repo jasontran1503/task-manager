@@ -11,11 +11,13 @@ module.exports = {
             const lists = await List.find({});
             if (lists.length > 0) {
                 return res.status(200).json({
+                    success: true,
                     message: 'Thành công',
                     data: lists
                 });
             } else {
                 return res.status(200).json({
+                    success: true,
                     message: 'Không có dữ liệu!'
                 });
             }
@@ -48,11 +50,13 @@ module.exports = {
                 ]).exec((err, data) => {
                     if (err) {
                         return res.status(200).json({
+                            success: false,
                             message: 'Có lỗi',
                             data: err
                         });
                     } else {
                         return res.status(200).json({
+                            success: true,
                             message: 'Thành công',
                             data
                         });
@@ -60,6 +64,7 @@ module.exports = {
                 });
             } else {
                 return res.status(200).json({
+                    success: true,
                     message: 'Không tìm thấy list'
                 });
             }
@@ -79,12 +84,14 @@ module.exports = {
             const list = await List.findOne({ listName });
             if (list) {
                 return res.status(200).json({
+                    success: false,
                     message: 'Tên List đã tồn tại'
                 });
             } else {
                 const newList = await List.create({ listName });
 
                 return res.status(200).json({
+                    success: true,
                     message: 'Thêm mới thành công',
                     data: newList
                 });
@@ -105,6 +112,7 @@ module.exports = {
             const list = await List.findOne(req.body);
             if (list) {
                 return res.status(200).json({
+                    success: false,
                     message: 'Tên List đã tồn tại'
                 });
             } else {
@@ -115,11 +123,13 @@ module.exports = {
 
                 if (updatedList) {
                     return res.status(200).json({
+                        success: true,
                         message: 'Cập nhật thành công',
                         data: updatedList
                     });
                 } else {
                     return res.status(200).json({
+                        success: false,
                         message: 'Có lỗi'
                     });
                 }
@@ -145,31 +155,16 @@ module.exports = {
                     });
                 }
                 return res.status(200).json({
+                    success: true,
                     message: 'Xóa thành công',
                     data: list
                 });
             } else {
                 return res.status(200).json({
+                    success: true,
                     message: 'Không tìm thấy list'
                 });
             }
-            const tasks = list.tasks;
-            console.log(tasks);
-            if (tasks) {
-                // await Task.deleteMany({ _id: { $in: tasks } }, (err) => {
-                //     next(err);
-                // })
-            }
-            // if (list) {
-            //     return res.status(200).json({
-            //         message: 'Xóa thành công',
-            //         data: list
-            //     });
-            // } else {
-            //     return res.status(200).json({
-            //         message: 'Không tìm thấy list'
-            //     });
-            // }
         } catch (error) {
             next(error);
         }

@@ -14,11 +14,13 @@ module.exports = {
             if (list) {
                 const tasks = await Task.find({ listId });
                 return res.status(200).json({
+                    success: true,
                     message: 'Thành công',
                     data: tasks
                 });
             } else {
                 return res.status(200).json({
+                    success: true,
                     message: 'Không tìm thấy list'
                 });
             }
@@ -42,11 +44,13 @@ module.exports = {
                 list.save();
 
                 return res.status(200).json({
+                    success: true,
                     message: 'Thêm mới thành công',
                     data: newTask
                 });
             }
             return res.status(200).json({
+                success: true,
                 message: 'Không tìm thấy list'
             });
         } catch (error) {
@@ -72,15 +76,18 @@ module.exports = {
                     list.save();
 
                     return res.status(200).json({
+                        success: true,
                         message: 'Xóa thành công',
                         data: task
                     });
                 }
                 return res.status(200).json({
+                    success: true,
                     message: 'Không tìm thấy task'
                 });
             }
             return res.status(200).json({
+                success: true,
                 message: 'Không tìm thấy list'
             });
         } catch (error) {
@@ -102,11 +109,13 @@ module.exports = {
             });
             if (updatedTask) {
                 return res.status(200).json({
+                    success: true,
                     message: 'Cập nhật thành công',
                     data: updatedTask
                 });
             } else {
                 return res.status(200).json({
+                    success: true,
                     message: 'Không tìm thấy task'
                 });
             }
