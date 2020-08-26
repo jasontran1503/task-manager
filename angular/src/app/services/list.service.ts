@@ -38,4 +38,10 @@ export class ListService {
     return this.http.post<DataResponse>(url, body);
   }
 
+  updateList(listId: string, listName: string) {
+    const params = { listId };
+    const body = { listName };
+    return this.http.put<DataResponse>(url, body, { params });
+  }
+
 }

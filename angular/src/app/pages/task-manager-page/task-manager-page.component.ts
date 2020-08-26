@@ -67,13 +67,23 @@ export class TaskManagerPageComponent implements OnInit, OnDestroy {
       });
   }
 
+  deleteTaskItem(taskId: string) {
+    this.spinner.show();
+    this.taskService.deleteTask(this.listActive._id, taskId)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((response: any) => {
+        this.spinner.hide();
+        this.getListItemDetail(this.listActive);
+      });
+  }
+
   addListItem(listName: string) {
     this.spinner.show();
     this.listService.addList(listName)
       .pipe(takeUntil(this.destroy$))
       .subscribe((response: any) => {
         this.spinner.hide();
-        console.log(response);
+        this.getAllLists();
       });
   }
 
@@ -92,13 +102,24 @@ export class TaskManagerPageComponent implements OnInit, OnDestroy {
     // after modal close
     this.modalRef.content.eventAddList.subscribe((res: any) => {
       this.addListItem(res.content);
-      this.getAllLists();
     });
   }
 
-  openModalUpdateListItem() {
+  updateListItem(listId: string, listName: string) {
+    this.spinner.show();
+    this.listService.updateList(listId, listName)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((response: any) => {
+        this.spinner.hide();
+        this.getAllLists();
+      });
+  }
+
+  openModalUpdateListItem(updatedList: List) {
     const initialState = {
-      modalType: ModalType.UPDATE_LIST
+      modalType: ModalType.UPDATE_LIST,
+      modalTitle: 'Update list',
+      updatedList
     };
     this.modalRef = this.modalService.show(AddUpdateItemComponent,
       {
@@ -109,7 +130,7 @@ export class TaskManagerPageComponent implements OnInit, OnDestroy {
 
     // after modal close
     this.modalRef.content.eventUpdateList.subscribe(res => {
-      console.log(res);
+      this.updateListItem(updatedList._id, res.content);
     });
   }
 
@@ -119,7 +140,7 @@ export class TaskManagerPageComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.destroy$))
       .subscribe((response: any) => {
         this.spinner.hide();
-        console.log(response);
+        this.getListItemDetail(this.listActive);
       });
   }
 
@@ -139,16 +160,17 @@ export class TaskManagerPageComponent implements OnInit, OnDestroy {
       // after modal close
       this.modalRef.content.eventAddTask.subscribe(res => {
         this.addTaskItem(this.listActive._id, res.content);
-        this.getListItemDetail(this.listActive);
       });
     } else {
-      alert('đá');
+      alert('Bạn chưa chọn list nào?');
     }
   }
 
-  openModalUpdateTaskItem() {
+  openModalUpdateTaskItem(updatedTask: Task) {
     const initialState = {
-      modalType: ModalType.UPDATE_TASK
+      modalType: ModalType.UPDATE_TASK,
+      modalTitle: 'Update task',
+      updatedTask
     };
     this.modalRef = this.modalService.show(AddUpdateItemComponent,
       {

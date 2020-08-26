@@ -14,6 +14,8 @@ export class TasksComponent implements OnInit {
 
   @Input() tasks: Task[];
   @Output() openModalAddTaskItem = new EventEmitter();
+  @Output() openModalUpdateTaskItem = new EventEmitter();
+  @Output() deleteTaskItem = new EventEmitter();
 
   constructor() { }
 
@@ -22,6 +24,14 @@ export class TasksComponent implements OnInit {
 
   addTask() {
     this.openModalAddTaskItem.emit();
+  }
+
+  updateTask(task: Task) {
+    this.openModalUpdateTaskItem.emit(task);
+  }
+
+  deleteTask(taskId: string) {
+    this.deleteTaskItem.emit(taskId);
   }
 
   activeTaskItem(index: number) {

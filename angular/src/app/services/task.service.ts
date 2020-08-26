@@ -22,4 +22,9 @@ export class TaskService {
     return this.http.post<DataResponse>(url, body);
   }
 
+  deleteTask(listId: string, taskId: string): Observable<DataResponse> {
+    const params = { listId, taskId };
+    return this.http.delete<DataResponse>(url, { params });
+  }
+
 }

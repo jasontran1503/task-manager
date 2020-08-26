@@ -15,6 +15,7 @@ export class ListsComponent implements OnInit {
   @Output() deleteListItem = new EventEmitter();
   @Output() refreshListItem = new EventEmitter();
   @Output() openModalAddListItem = new EventEmitter();
+  @Output() openModalUpdateListItem = new EventEmitter();
 
   constructor() { }
 
@@ -27,6 +28,10 @@ export class ListsComponent implements OnInit {
 
   refreshList() {
     this.refreshListItem.emit();
+  }
+
+  updateList(list: List) {
+    this.openModalUpdateListItem.emit(list);
   }
 
   deleteList(id: string) {

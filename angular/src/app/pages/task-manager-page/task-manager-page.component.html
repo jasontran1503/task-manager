@@ -11,11 +11,14 @@
             <app-lists [lists]="lists" (getListItemDetail)="getListItemDetail($event)"
                 (deleteListItem)="deleteListItem($event)"
                 (refreshListItem)="getAllLists()"
+                (openModalUpdateListItem)="openModalUpdateListItem($event)"
                 (openModalAddListItem)="openModalAddListItem()"></app-lists>
         </div>
         <div class="tasks">
             <app-tasks [tasks]="tasks"
-            (openModalAddTaskItem)="openModalAddTaskItem()"></app-tasks>
+            (openModalAddTaskItem)="openModalAddTaskItem()"
+            (openModalUpdateTaskItem)="openModalUpdateTaskItem($event)"
+            (deleteTaskItem)="deleteTaskItem($event)"></app-tasks>
         </div>
     </div>
 </div>

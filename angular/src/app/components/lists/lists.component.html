@@ -5,11 +5,11 @@
         (click)="refreshList()"></i>
     </div>
     <div class="list-body">
-        <div class="list-body-item" *ngFor="let list of lists; index as i" (click)="activeListItem(list, i)"
+        <div class="list-body-item" *ngFor="let list of lists; index as i" (dblclick)="activeListItem(list, i)"
             [class.active]="selectedIndex === i">
             <div class="list-body-item-content">{{ list.listName }}</div>
             <div class="list-body-item-action">
-                <i class="fa fa-pencil-square-o mr-2 icon-action" aria-hidden="true"></i>
+                <i class="fa fa-pencil-square-o mr-2 icon-action" aria-hidden="true" (click)="updateList(list)"></i>
                 <i class="fa fa-trash-o icon-action" aria-hidden="true" (click)="deleteList(list._id)"></i>
             </div>
         </div>
