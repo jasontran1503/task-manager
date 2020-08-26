@@ -22,6 +22,12 @@ export class TaskService {
     return this.http.post<DataResponse>(url, body);
   }
 
+  updateTask(taskId: string, taskName: string) {
+    const params = { taskId };
+    const body = { taskName };
+    return this.http.put<DataResponse>(url, body, { params });
+  }
+
   deleteTask(listId: string, taskId: string): Observable<DataResponse> {
     const params = { listId, taskId };
     return this.http.delete<DataResponse>(url, { params });

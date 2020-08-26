@@ -166,6 +166,16 @@ export class TaskManagerPageComponent implements OnInit, OnDestroy {
     }
   }
 
+  updateTaskItem(taskId: string, taskName: string) {
+    this.spinner.show();
+    this.taskService.updateTask(taskId, taskName)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((response: any) => {
+        this.spinner.hide();
+        this.getListItemDetail(this.listActive);
+      });
+  }
+
   openModalUpdateTaskItem(updatedTask: Task) {
     const initialState = {
       modalType: ModalType.UPDATE_TASK,
@@ -181,7 +191,7 @@ export class TaskManagerPageComponent implements OnInit, OnDestroy {
 
     // after modal close
     this.modalRef.content.eventUpdateTask.subscribe(res => {
-      console.log(res);
+      this.updateTaskItem(updatedTask._id, res.content);
     });
   }
 

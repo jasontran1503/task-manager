@@ -92,6 +92,7 @@ module.exports = {
      * Update task
      * @route PUT api/task
      * @queryParams taskId
+     * @body taskName
      */
     updateTask: async (req, res, next) => {
         try {
