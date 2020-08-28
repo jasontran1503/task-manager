@@ -34,8 +34,4 @@ export class TasksComponent implements OnInit {
     this.deleteTaskItem.emit(taskId);
   }
 
-  activeTaskItem(index: number) {
-    this.selectedIndex = index;
-  }
-
 }
