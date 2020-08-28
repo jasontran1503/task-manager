@@ -20,7 +20,7 @@ export class LogOutComponent implements OnInit {
   }
 
   logOut() {
-    this.router.navigate(['log-in']);
+    this.router.navigate(['/']);
   }
 
 }
