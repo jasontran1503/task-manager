@@ -1,0 +1,8 @@
+.pages {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #00d2ff;
+    background-image: linear-gradient(to right, #00d2ff, #3a7bd5);
+}

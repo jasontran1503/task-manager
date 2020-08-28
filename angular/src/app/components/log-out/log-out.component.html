@@ -1,8 +1,8 @@
-<div class="log-out-button" (click)="show()">
+<div class="log-out-button" (click)="showModalLogOut()">
     <i class="fa fa-user" aria-hidden="true"></i>
 </div>
 
-<div class="log-out-modal" *ngIf="isShow">
+<div class="log-out-modal" *ngIf="isShow" (click)="logOut()">
     <span class="log-out-text"><i class="fa fa-sign-out" aria-hidden="true"></i>
         Log out</span>
 </div>

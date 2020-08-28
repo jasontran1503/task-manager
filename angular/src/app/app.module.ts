@@ -14,6 +14,9 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { LogOutComponent } from './components/log-out/log-out.component';
+import { UserAccountPageComponent } from './pages/user-account-page/user-account-page.component';
+import { LogInComponent } from './components/log-in/log-in.component';
+import { RegisterComponent } from './components/register/register.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +26,10 @@ import { LogOutComponent } from './components/log-out/log-out.component';
     TasksComponent,
     AddUpdateItemComponent,
     SpinnerComponent,
-    LogOutComponent
+    LogOutComponent,
+    UserAccountPageComponent,
+    LogInComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,

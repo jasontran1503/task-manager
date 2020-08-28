@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-log-out',
@@ -9,13 +10,17 @@ export class LogOutComponent implements OnInit {
 
   isShow = false;
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
   }
 
-  show() {
+  showModalLogOut() {
     this.isShow = !this.isShow;
+  }
+
+  logOut() {
+    this.router.navigate(['log-in']);
   }
 
 }
