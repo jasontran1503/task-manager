@@ -81,9 +81,13 @@ export class TaskManagerPageComponent implements OnInit, OnDestroy {
     this.spinner.show();
     this.listService.addList(listName)
       .pipe(takeUntil(this.destroy$))
-      .subscribe((response: any) => {
+      .subscribe((response: DataResponse) => {
         this.spinner.hide();
-        this.getAllLists();
+        if (response.success) {
+          this.getAllLists();
+        } else {
+          alert('Tên list đã tồn tại');
+        }
       });
   }
 

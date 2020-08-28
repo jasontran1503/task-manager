@@ -6,7 +6,8 @@ const taskSchema = new Schema({
     taskName: {
         type: String,
         trim: true,
-        minlength: 1
+        minlength: 1,
+        required: true
     },
     listId: {
         type: mongoose.Types.ObjectId,

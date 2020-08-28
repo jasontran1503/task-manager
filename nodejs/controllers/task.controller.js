@@ -48,11 +48,12 @@ module.exports = {
                     message: 'Thêm mới thành công',
                     data: newTask
                 });
+            } else {
+                return res.status(200).json({
+                    success: true,
+                    message: 'Không tìm thấy list'
+                });
             }
-            return res.status(200).json({
-                success: true,
-                message: 'Không tìm thấy list'
-            });
         } catch (error) {
             next(error);
         }
@@ -85,11 +86,12 @@ module.exports = {
                     success: true,
                     message: 'Không tìm thấy task'
                 });
+            } else {
+                return res.status(200).json({
+                    success: true,
+                    message: 'Không tìm thấy list'
+                });
             }
-            return res.status(200).json({
-                success: true,
-                message: 'Không tìm thấy list'
-            });
         } catch (error) {
             next(error);
         }
