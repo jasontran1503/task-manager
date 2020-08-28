@@ -12,6 +12,8 @@ import { AddUpdateItemComponent } from './components/add-update-item/add-update-
 import { SpinnerComponent } from './shared/spinner/spinner.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { ReactiveFormsModule } from '@angular/forms';
+import { AppRoutingModule } from './app-routing.module';
+import { LogOutComponent } from './components/log-out/log-out.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +23,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     TasksComponent,
     AddUpdateItemComponent,
     SpinnerComponent,
+    LogOutComponent
   ],
   imports: [
     BrowserModule,
@@ -28,7 +31,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     HttpClientModule,
     NgxSpinnerModule,
     ReactiveFormsModule,
-    ModalModule.forRoot()
+    ModalModule.forRoot(),
+    AppRoutingModule
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
   providers: [],

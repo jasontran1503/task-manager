@@ -1,0 +1,45 @@
+.log-out-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: white;
+    border: none;
+    color: #3199fa;
+    font-weight: bold;
+    border-radius: 50%;
+    height: 40px;
+    width: 40px;
+    outline: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.log-out-button:hover, .log-out-modal:hover {
+    cursor: pointer;
+    box-shadow: 3px 3px 3px 3px #5f5f5f;
+    transform: translateX(-10px);
+}
+
+.fa-user {
+    font-size: 20px;
+}
+
+.log-out-modal {
+    position: absolute;
+    top: 55px;
+    right: 10px;
+    width: 100px;
+    height: 30px;
+    border-radius: 5px;
+    background-color: white;
+    display: flex;
+    align-items: center;
+}
+
+.log-out-text {
+    font-size: 15px;
+    padding-left: 10px;
+    color: #3199fa;
+    font-weight: 600;
+}
