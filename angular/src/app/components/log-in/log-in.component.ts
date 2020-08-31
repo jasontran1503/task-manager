@@ -13,8 +13,12 @@ export class LogInComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  navigate() {
+  login() {
     this.router.navigate(['task-manager']);
+  }
+
+  register() {
+    this.router.navigate(['/', 'account', 'register']);
   }
 
 }
